@@ -5,6 +5,8 @@ import FillCMDCache from '../FillCMDCache';
 import {
   CacheMinPP,
   CacheMinPPBulk,
+  CacheMinPPAmount,  // eslint-disable-line no-unused-vars
+  CacheMinPPidx,  // eslint-disable-line no-unused-vars
   CacheObjects1,
   CacheObjects10,
   CacheObjects100,
@@ -68,7 +70,7 @@ function CachePP(target, amount) {
         amount === 1
       )
     )
-      CachePPArray.push([target[i].pp, amount, price]);
+      CachePPArray.push([target[i].pp, amount, price, i]);
   });
 }
 
@@ -103,6 +105,8 @@ export default function CacheBuildingsPP() {
   }
   CacheMinPP = CachePPArray[indexOfMin][0];
   CacheMinPPBulk = CachePPArray[indexOfMin][1];
+  CacheMinPPAmount = CachePPArray[indexOfMin][2];  // eslint-disable-line no-unused-vars
+  CacheMinPPidx = CachePPArray[indexOfMin][3];  // eslint-disable-line no-unused-vars
 
   CacheColour(CacheObjects1, 1);
   CacheColour(CacheObjects10, 10);

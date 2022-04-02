@@ -10,7 +10,13 @@ import CacheAllMissingUpgrades from '../Cache/Stats/MissingUpgrades';
 import CacheSeasonSpec from '../Cache/Stats/Reindeer';
 import { CacheGoldenAndWrathCookiesMults, CacheStatsCookies } from '../Cache/Stats/Stats';
 import AllAmountTillNextAchievement from '../Cache/TillNextAchievement/AllAmountTillNextAchievement';
-import { CacheDoRemakeBuildPrices, CacheHadBuildAura } from '../Cache/VariablesAndData';
+import {
+  CacheDoRemakeBuildPrices,
+  CacheHadBuildAura,
+  CacheMinPPAmount,
+  CacheMinPPBulk,
+  CacheMinPPidx
+} from '../Cache/VariablesAndData';
 import UpdateAscendState from '../Disp/HelperFunctions/UpdateAscendState';
 import { LastAscendState } from '../Disp/VariablesAndData';
 import InitData from '../Sim/InitializeData/InitData';
@@ -82,6 +88,19 @@ export default function CMLoopHook() {
     CheckGardenTick();
     CheckMagicMeter();
     CheckWrinklerCount();
+
+    /*
+     *
+     * if (cacheMinPP < cacheMinUpgradePP {upgrade} else {build})
+     *
+     */
+
+    if (CacheMinPPAmount <= Game.cookies) {
+      console.log('Buying ' + CacheMinPPBulk + ' of "' + Game.Objects[CacheMinPPidx].name + '" for ' + CacheMinPPAmount + ' cookies.'); // eslint-disable-line prefer-template
+      Game.Objects[CacheMinPPidx].buy(CacheMinPPBulk);
+      CacheDoRemakeBuildPrices = 1;
+    }
+
   }
   // To remove Timers when ascending
   CheckGoldenCookie();
