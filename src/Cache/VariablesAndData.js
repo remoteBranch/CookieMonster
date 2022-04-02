@@ -67,6 +67,15 @@ export let CacheSeasonPopShimmer = {};
 
 export let CacheTimeTillNextPrestige = 0;
 
+/** Stores index of lowest cost "blue" upgrade, -1 for none */
+export let  CacheMinBlueIdx = -1;
+/** Stores Price of lowest cost "blue" upgrade */
+export let CacheMinBluePrice = 0;
+/** Stores index of lowest cost "gray" upgrade, -1 for none */
+export let  CacheMinGrayIdx = -1;
+/** Stores Price of lowest cost "gray" upgrade */
+export let CacheMinGrayPrice = 0;
+
 /** Stores lowest PP value */
 export let CacheMinPP = 0;
 /** Stores lowest PP value category */
@@ -123,3 +132,132 @@ export let CacheGods = {
   9: [0, 0, 0],
   10: [0, 0, 0],
 };
+
+/** List of things never to auto-buy */
+export const CacheUpgradeExclude = [
+  // Filter to exclude Switches / Prestiege Items
+
+  // Toggle type = tech
+  /* data placeholder
+  65, // Specialized chocolate chips
+  66, // Designer cocoa beans
+  67, // Ritual rolling pins
+  68, // Underworld ovens
+  */
+  69, // One mind
+  /*
+  70, // Exotic nuts
+  71, // Communal brainsweep
+  72, // Arcane sugar
+  73, // Elder Pact
+  */
+
+  // Toggle type = toggle
+  74, // Elder Pledge
+  84, // Elder Covenant
+  85, // Revoke Elder Covenant
+  87, // Sacrificial rolling pins ???
+  182, // Festive biscuit
+  183, // Ghostly biscuit
+  184, // Lovesick biscuit
+  185, // Fool's biscuit
+  209, // Bunny biscuit
+  331, // Golden switch [off]
+  332, // Golden switch [on]
+  333, // Milk selector
+  361, // Golden cookie sound selector
+  414, // Background selector
+  452, // Sugar frenzy
+  563, // Shimmering veil [off]
+  564, // Shimmering veil [on]
+
+  // Toggle type = prestige
+  141, // Persistent memory
+  181, // Season switcher
+  253, // Tin of british tea biscuits
+  254, // Box of macarons
+  255, // Box of brand biscuits
+  264, // Permanent upgrade slot I
+  265, // Permanent upgrade slot II
+  266, // Permanent upgrade slot III
+  267, // Permanent upgrade slot IV
+  268, // Permanent upgrade slot V
+  269, // Starspawn
+  270, // Starsnow
+  271, // Starterror
+  272, // Starlove
+  273, // Startrade
+  274, // Angels
+  275, // Archangels
+  276, // Virtues
+  277, // Dominions
+  278, // Cherubim
+  279, // Seraphim
+  280, // God
+  281, // Twin Gates of Transcendence
+  282, // Heavenly luck
+  283, // Lasting fortune
+  284, // Decisive fate
+  285, // Divine discount
+  286, // Divine sales
+  287, // Divine bakeries
+  288, // Starter kit
+  289, // Starter kitchen
+  290, // Halo gloves
+  291, // Kitten angels
+  292, // Unholy bait
+  293, // Sacrilegious corruption
+  323, // How to bake your dragon
+  325, // Chimera
+  326, // Tin of butter cookies
+  327, // Golden switch
+  328, // Classic dairy selection
+  329, // Fanciful dairy selection
+  353, // Belphegor
+  354, // Mammon
+  355, // Abaddon
+  356, // Satan
+  357, // Asmodeus
+  358, // Beelzebub
+  359, // Lucifer
+  360, // Golden cookie alert sound
+  362, // Basic wallpaper assortment
+  363, // Legacy
+  364, // Elder spice
+  365, // Residual luck
+  368, // Five-finger discount
+  393, // Synergies Vol. I
+  394, // Synergies Vol. II
+  395, // Heavenly cookies
+  396, // Wrinkly cookies
+  397, // Distilled essence of redoubled luck
+  408, // Stevia Caelestis
+  409, // Diabetica Daemonicus
+  410, // Sucralosia Inutilis
+  411, // Lucky digit
+  412, // Lucky number
+  413, // Lucky payout
+  449, // Sugar baking
+  450, // Sugar craving
+  451, // Sugar aging process
+  495, // Eye of the wrinkler
+  496, // Inspired checklist
+  505, // Label printer
+  520, // Heralds
+  537, // Keepsakes
+  539, // Sugar crystal cookies
+  540, // Box of maybe cookies
+  541, // Box of not cookies
+  542, // Box of pastries
+  561, // Genius accounting
+  562, // Shimmering veil
+  591, // Cosmic beginner's luck
+  592, // Reinforced membrane
+  643, // Fortune cookies
+  646, // Kitten wages
+  647, // Pet the dragon
+  717, // Cat ladies
+  718, // Milkhelp&reg; lactose intolerance relief tablets
+  719, // Aura gloves
+  720 // Luminous gloves
+];

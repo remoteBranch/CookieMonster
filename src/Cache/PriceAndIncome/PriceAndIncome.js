@@ -46,6 +46,7 @@ function CacheUpgradeIncome() {
     if (upgradeName === 'Elder Pledge') {
       CacheUpgrades[upgradeName] = {
         bonus: Game.cookiesPs - CacheAverageGainBank,
+        id: Game.UpgradesInStore[i].id
       };
       if (Game.mods.cookieMonsterFramework.saveData.cookieMonsterMod.settings.CalcWrink === 1)
         CacheUpgrades[upgradeName].bonus -= CacheAverageGainWrink;
@@ -54,6 +55,7 @@ function CacheUpgradeIncome() {
       if (!Number.isFinite(CacheUpgrades[upgradeName].bonus)) CacheUpgrades[upgradeName].bonus = 0;
     } else {
       CacheUpgrades[upgradeName] = {};
+      CacheUpgrades[upgradeName].id = Game.UpgradesInStore[i].id;
       if (bonusIncome[0]) CacheUpgrades[upgradeName].bonus = bonusIncome[0];
       if (bonusIncome[1]) CacheUpgrades[upgradeName].bonusMouse = bonusIncome[1];
     }

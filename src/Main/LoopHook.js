@@ -15,7 +15,11 @@ import {
   CacheHadBuildAura,
   CacheMinPPAmount,
   CacheMinPPBulk,
-  CacheMinPPidx
+  CacheMinPPidx,
+  CacheMinBlueIdx,
+  CacheMinGrayIdx,
+  CacheMinBluePrice,
+  CacheMinGrayPrice
 } from '../Cache/VariablesAndData';
 import UpdateAscendState from '../Disp/HelperFunctions/UpdateAscendState';
 import { LastAscendState } from '../Disp/VariablesAndData';
@@ -90,17 +94,28 @@ export default function CMLoopHook() {
     CheckWrinklerCount();
 
     /*
-     *
-     * if (cacheMinPP < cacheMinUpgradePP {upgrade} else {build})
-     *
+     * If there exists a blue upgrade, buy it or save up for it at the expense
+     * of a building upgrade.
      */
-
-    if (CacheMinPPAmount <= Game.cookies) {
+    if (CacheMinBlueIdx >= 0 && CacheMinBluePrice <= Game.cookies) {
+      console.log('Buing upgrade "' + Game.UpgradesById[CacheMinBlueIdx].name + '" for ' + CacheMinBluePrice + 'cookies.');  // eslint-disable-line prefer-template
+      Game.UpgradesById[CacheMinBlueIdx].buy(1);
+      CacheDoRemakeBuildPrices = 1;
+    } else if (CacheMinBlueIdx < 0 && CacheMinPPAmount <= Game.cookies) {
       console.log('Buying ' + CacheMinPPBulk + ' of "' + Game.Objects[CacheMinPPidx].name + '" for ' + CacheMinPPAmount + ' cookies.'); // eslint-disable-line prefer-template
       Game.Objects[CacheMinPPidx].buy(CacheMinPPBulk);
       CacheDoRemakeBuildPrices = 1;
     }
-
+    /*
+     * If there exists a gray upgrade, and we did not actively buy a blue upgrade
+     * or a building, then see if we can afford the gray upgrade and get it.
+     *
+    */
+    if (CacheDoRemakeBuildPrices === 0 && CacheMinGrayIdx >= 0 && CacheMinGrayPrice <= Game.cookies) {
+      console.log('Buying gray upgrade "' + Game.UpgradesById[CacheMinGrayIdx].name + '" for ' + CacheMinGrayPrice + 'cookies.');  // eslint-disable-line prefer-template
+      Game.UpgradesById[CacheMinGrayIdx].buy(1);
+      CacheDoRemakeBuildPrices = 1;
+    }
   }
   // To remove Timers when ascending
   CheckGoldenCookie();
